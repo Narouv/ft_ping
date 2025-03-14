@@ -20,6 +20,7 @@ void	print_help_exit(void)
 	printf("\n");
 	printf("      --usage\t\tgive a short usage message\n");
 	printf("  -?, --help\t\tgive this help list\n");
+	printf("  -v, --verbose\t\tverbose output\n");
 	exit(0);
 }
 
