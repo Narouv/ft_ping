@@ -6,7 +6,7 @@
 #    By: rnauke <rnauke@student.42heilbronn.de>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/27 14:34:21 by rnauke            #+#    #+#              #
-#    Updated: 2023/09/25 18:17:44 by rnauke           ###   ########.fr        #
+#    Updated: 2025/03/14 16:40:03 by rnauke           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,37 +21,25 @@ OBJECTS = $(SOURCES:.c=.o)
 SOURCES_BONUS = ft_lstadd_back.c ft_lstadd_front.c ft_lstclear.c ft_lstdelone.c ft_lstiter.c ft_lstlast.c ft_lstmap.c ft_lstnew.c ft_lstsize.c
 OBJECTS_BONUS = $(SOURCES_BONUS:.c=.o)
 
-PRINTF_DIR = ft_printf/
-PRINTF_SOURCES = ft_printf_address.c ft_printf_char.c ft_printf_decimal.c ft_printf_hex.c ft_printf_itoa.c ft_printf_itoah.c ft_printf_main.c ft_printf_percent.c ft_printf_string.c ft_printf_ulltoah.c ft_printf_unsigned.c
-PRINTF_OBJECTS = $(PRINTF_SOURCES:.c=.o)
-
-PRINTF_OBJECT_DIR = $(addprefix $(PRINTF_DIR), $(PRINTF_OBJECTS))
-PRINTF_SOURCES_DIR = $(addprefix $(PRINTF_DIR), $(PRINTF_SOURCES))
-
 all: bonus
 
 bonus: $(NAME) $(OBJECTS_BONUS)
 
-${NAME}: $(PRINTF_OBJECT_DIR)
+${NAME}:
 	cc -c $(SOURCES) $(FLAGS)
-	ar -vcrs ${NAME} $(OBJECTS) $(PRINTF_OBJECT_DIR)
+	ar -vcrs ${NAME} $(OBJECTS)
 
 $(OBJECTS_BONUS):
 	cc -c $(SOURCES_BONUS) $(FLAGS)
 	ar -vcrs ${NAME} $(OBJECTS_BONUS)
 
-$(PRINTF_DIR)/%.o:
-	cc -c $(addprefix $(PRINTF_DIR), $(PRINTF_SOURCES)) $(FLAGS)
-
 clean:
 	rm -f $(OBJECTS)
 	rm -f $(OBJECTS_BONUS)
-	rm -f $(PRINTF_OBJECT_DIR)
 
 fclean:
 	rm -f $(OBJECTS)
 	rm -f $(OBJECTS_BONUS)
-	rm -f $(PRINTF_OBJECT_DIR)
 	rm -f $(NAME)
 
 .PHONY: re fclean clean

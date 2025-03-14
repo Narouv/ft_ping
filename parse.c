@@ -18,7 +18,6 @@ void	print_help_exit(void)
 	printf("Send ICMP ECHO_REQUEST packets to network hosts.\n");
 	printf("\n Options valid for all request types:\n");
 	printf("\n");
-	printf("      --ttl=N\t\tspecify N as time-to-live\n");
 	printf("      --usage\t\tgive a short usage message\n");
 	printf("  -?, --help\t\tgive this help list\n");
 	exit(0);
@@ -44,11 +43,6 @@ void	handle_abbrev(char *option, t_ping *context)
 			printf("verbose = True\n");
 			context->b_verbose = 1;
 		}
-		else if (!ft_strncmp(&option[i], "q", 1))
-		{
-			printf("quiet output = True\n");
-			context->b_quiet = 1;
-		}
 		else
 		{
 			printf("invalid option %s\n", option);
@@ -60,6 +54,7 @@ void	handle_abbrev(char *option, t_ping *context)
 
 // The exit(1) is only here because the program would not
 // compile otherwise (no return in non-void function)
+// in print_usage_error the program exits regardless
 char	*get_next_argv(char *option, char ***argv)
 {
 	(*argv)++;
@@ -80,29 +75,7 @@ void	handle_expanded(char *option, t_ping *context, char ***argv)
 	else if (!ft_strncmp(option, "--help", 5))
 		print_help_exit();
 	else if (!ft_strncmp(option, "--verbose", 9))
-	{
-		printf("verbose = True\n");
 		context->b_verbose = 1;
-	}
-	else if (!ft_strncmp(option, "--quiet", 7))
-	{
-		printf("quiet output = True\n");
-		context->b_quiet = 1;
-	}
-	else if (!ft_strncmp(option, "--ttl", 4))
-	{
-		if (ft_strchr(option, '='))
-			printf("time to live = %d\n", ft_atoi(ft_strchr(option, '=')));
-		else
-		{
-			if (!ft_atoi(get_next_argv(option, argv)))
-			{
-				printf("invalid input after %s\n", option);
-				print_usage_error();
-			}
-			printf("time to live = %d\n", ft_atoi(get_next_argv(option, argv)));
-		}
-	}
 	else
 	{
 		printf("invalid option %s\n", option);

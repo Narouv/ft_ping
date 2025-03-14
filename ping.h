@@ -39,10 +39,6 @@ typedef struct	s_ping
 	char				*hostname;
 	int					sockfd;
 	int					b_verbose;
-	int					b_quiet;
-	int					b_noroute;
-	int					time_to_live;
-	int					linger_for;
 	int					sequence;
 }	t_ping;
 
@@ -62,7 +58,7 @@ void	receive_icmp_reply(t_ping *context, struct timeval *start);
 
 // util.c
 long	llsqrt(long long a);
-void	print_icmp_reply(const char *buffer, ssize_t length); // kuss an chatgpt
+void	print_icmp_reply(const char *buffer, ssize_t length);
 void	print_icmp_packet(const char *buffer, ssize_t length);
 
 

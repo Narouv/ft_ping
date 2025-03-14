@@ -26,6 +26,7 @@ long	llsqrt(long long a)
 	return (long)x;
 }
 
+// kuss an gpt für die beiden hier
 void print_icmp_reply(const char *buffer, ssize_t length)
 {
 	if (length <= 0) {

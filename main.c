@@ -96,19 +96,6 @@ void	init(t_ping *context)
 
 	context->statistics.t_max = LLONG_MIN;
 	context->statistics.t_min = LLONG_MAX;
-	if (!(context->time_to_live))
-		context->time_to_live = 63;
-	// context->time_to_live = 1;
-	if (0 > setsockopt(context->sockfd, IPPROTO_IP, IP_TTL, &context->time_to_live, sizeof(context->time_to_live)))
-		perror("setsockopt ttl failed");
-	// if (context->linger_for)
-	// {
-	// 	linger.l_onoff = 1;
-	// 	linger.l_linger = context->linger_for;
-	// 	setsockopt(context->sockfd, SOL_SOCKET, SO_LINGER, &linger, (socklen_t)sizeof(linger));
-	// }
-	// if (context->b_noroute)
-	// 	setsockopt(context->sockfd, SOL_SOCKET, SO_DONTROUTE, &(context->b_noroute), (socklen_t)sizeof(int));
 	return;
 }
 
@@ -151,7 +138,7 @@ int	main(int argc, char **argv)
 	inet_ntop(AF_INET, &context.target_address.sin_addr, resolved, 16);
 	printf("PING %s (%s): %d data bytes", context.hostname, resolved, 56);
 	if (context.b_verbose)
-		printf(", %x = %d", getpid(), getpid());
+		printf(", id 0x0%x = %d", getpid(), getpid());
 	printf("\n");
 	initialize_ping(&context);
 	close(context.sockfd);
